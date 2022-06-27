@@ -1,12 +1,13 @@
 import { initializeApp } from 'firebase/app';
-import { 
-    getAuth, 
-    signInWithRedirect, 
-    signInWithPopup, 
+import {
+    getAuth,
+    signInWithRedirect,
+    signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    onAuthStateChanged
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -48,7 +49,7 @@ export const createUserFromAuth = async (userAuth, additionalInfo = {}) => {
     console.log(userSnapshot);
     console.log(userSnapshot.exists());
 
-    if(!userSnapshot.exists()){
+    if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();
 
@@ -68,13 +69,15 @@ export const createUserFromAuth = async (userAuth, additionalInfo = {}) => {
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-    if(!email || !password) return;
+    if (!email || !password) return;
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-    if(!email || !password) return;
+    if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
 export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
