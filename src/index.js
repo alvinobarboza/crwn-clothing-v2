@@ -4,9 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { UserProvider } from './components/contexts/user.context';
-import { CategoriesProvider } from './components/contexts/categories.context';
-import { CartProvider } from './components/contexts/cart.context';
+import { UserProvider } from './contexts/user.context';
+import { CategoriesProvider } from './contexts/categories.context';
+import { CartProvider } from './contexts/cart.context';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
